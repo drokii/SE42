@@ -13,18 +13,20 @@ import javax.persistence.Persistence;
 
 public class RegistrationMgr {
 
-    private UserDAO userDAO;
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
     private EntityManager em;
+    private UserDAO userDAO;
 
+    public RegistrationMgr() {
+    }
 
     public RegistrationMgr(EntityManager em) {
-       this.em = em;
-       userDAO = new JPAUserDAOCollectionImpl(this.em);
+        this.em = em;
     }
 
     public User registerUser(String email) {
-
+        em = emf.createEntityManager();
+        userDAO = new JPAUserDAOCollectionImpl(this.em);
         this.em.getTransaction().begin();
         if (!email.contains("@")) {
             return null;
@@ -33,24 +35,34 @@ public class RegistrationMgr {
         if (user != null) {
             return user;
         }
-        user = new User(email);
-        userDAO.create(user);
-        this.em.getTransaction().commit();
-        this.em.clear();
-        return user;
+        else{
+            user = new User(email);
+            if (!em.getTransaction().isActive()) {
+                em.getTransaction().begin();
+            }
+            userDAO.create(user);
+            em.getTransaction().commit();
+            em.close();
+            return user;
+        }
     }
 
+
     public User getUser(String email) {
+        em = emf.createEntityManager();
+        userDAO = new JPAUserDAOCollectionImpl(this.em);
         this.em.getTransaction().begin();
-        User user = userDAO.findByEmail(email);
-        this.em.clear();
-        return user;
+        User returner = userDAO.findByEmail(email);
+        em.close();
+        return returner;
     }
 
     public List<User> getUsers() {
+        em = emf.createEntityManager();
+        userDAO = new JPAUserDAOCollectionImpl(this.em);
         this.em.getTransaction().begin();
-        List<User> users = userDAO.findAll();
-        em.clear();
-        return users;
+        List<User> returner = userDAO.findAll();
+        em.close();
+        return returner;
     }
 }
