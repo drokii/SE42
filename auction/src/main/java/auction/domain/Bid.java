@@ -3,16 +3,30 @@ package auction.domain;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
-import java.io.Serializable;
+import javax.persistence.*;
 
-public class Bid implements Serializable {
+@Entity
+public class Bid {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne
+    private Item item;
+    @Embedded
     private FontysTime time;
+    @ManyToOne
     private User buyer;
+    @Embedded
     private Money amount;
 
+    public Bid() {
+    }
+
     public Bid(Item item, User buyer, Money amount) {
-        //TODO
+        this.item = item;
+        this.buyer = buyer;
+        this.amount = amount;
     }
 
     public FontysTime getTime() {
