@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import auction.domain.User;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -16,10 +17,11 @@ public class RegistrationMgrTest {
 
     private RegistrationMgr registrationMgr;
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
+    private final EntityManager em = emf.createEntityManager();
 
     @Before
     public void setUp() throws Exception {
-        registrationMgr = new RegistrationMgr(emf.createEntityManager());
+        registrationMgr = new RegistrationMgr(em);
     }
 
     @Test
@@ -29,8 +31,7 @@ public class RegistrationMgrTest {
         User user2 = registrationMgr.registerUser("xxx2@yyy2");
         assertTrue(user2.getEmail().equals("xxx2@yyy2"));
         User user2bis = registrationMgr.registerUser("xxx2@yyy2");
-        assertSame(user2bis, user2);
-        //geen @ in het adres
+        assertEquals(user2bis.getEmail(), user2.getEmail());
         assertNull(registrationMgr.registerUser("abc"));
     }
 
