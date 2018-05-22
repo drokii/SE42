@@ -11,32 +11,25 @@ import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import javax.persistence.*;
 
 >>>>>>> c36485ce9e90321e1569a68fda7fc5624d096f84
 @Entity
 public class Bid {
+=======
+import java.io.Serializable;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToOne
-    private Item item;
-    @Embedded
+public class Bid implements Serializable {
+>>>>>>> parent of f12b1e9... Finished for week 12, need help doe
+
     private FontysTime time;
-    @ManyToOne
     private User buyer;
-    @Embedded
     private Money amount;
 
-    public Bid() {
-    }
-
     public Bid(Item item, User buyer, Money amount) {
-        this.item = item;
-        this.buyer = buyer;
-        this.amount = amount;
+        //TODO
     }
 
     public FontysTime getTime() {
