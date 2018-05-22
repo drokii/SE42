@@ -10,6 +10,11 @@ import javax.persistence.OneToOne;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
+<<<<<<< HEAD
+=======
+import javax.persistence.*;
+
+>>>>>>> c36485ce9e90321e1569a68fda7fc5624d096f84
 @Entity
 public class Bid {
 

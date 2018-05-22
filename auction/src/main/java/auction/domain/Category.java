@@ -1,6 +1,9 @@
 package auction.domain;
 
+<<<<<<< HEAD
 import javax.persistence.Column;
+=======
+>>>>>>> c36485ce9e90321e1569a68fda7fc5624d096f84
 import javax.persistence.Embeddable;
 
 @Embeddable
