@@ -1,6 +1,5 @@
 package nl.fontys.util;
 
-<<<<<<< HEAD
 import javax.persistence.Embeddable;
 <<<<<<< HEAD
 import java.sql.Time;
@@ -15,12 +14,6 @@ import java.util.TimeZone;
 @Embeddable
 public class FontysTime implements Serializable {
 >>>>>>> c36485ce9e90321e1569a68fda7fc5624d096f84
-=======
-import java.sql.Time;
-import java.util.TimeZone;
-
-public class FontysTime {
->>>>>>> parent of f12b1e9... Finished for week 12, need help doe
 	private long seconds;
 
 	public FontysTime() {
